@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Review Results</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: #f1f5f9;
+    }
+
+    .back-button {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background-color: #f59e0b;
+      color: white;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    #loading {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-size: 1.5rem;
+      color: #1e293b;
+    }
+
+    #resultsContent {
+      display: none;
+      padding: 2rem;
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .left, .right {
+      flex: 1;
+      min-width: 300px;
+      background: white;
+      padding: 1.5rem;
+      border-radius: 1rem;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+
+    .paper {
+      margin-bottom: 1.5rem;
+    }
+
+    .paper h3 {
+      margin-bottom: 0.3rem;
+    }
+
+    .score {
+      color: #475569;
+      font-size: 0.9rem;
+      margin-top: 0.4rem;
+    }
+
+    a {
+      color: #2563eb;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    h2 {
+      margin-top: 0;
+    }
+
+    ol {
+      padding-left: 1.2rem;
+    }
+
+    ol li {
+      margin-bottom: 0.6rem;
+    }
+  </style>
+</head>
+<body>
+    <a href="home.html" class="back-button">← Back to Home</a>
+
+
+  <div id="loading">
+    <img src="https://cdn-icons-png.flaticon.com/512/7774/7774225.png" alt="Loading Icon" width="30" style="margin-right: 10px;">
+    Loading your review…
+  </div>
+
+  <div id="resultsContent">
+    <div class="left">
+      <h2>Literature Review Summary</h2>
+      <div id="summaryText">Loading summary...</div>
+    </div>
+    <div class="right">
+      <h2>Relevant Papers</h2>
+      <div id="papersList"></div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      const loading = document.getElementById("loading");
+      const content = document.getElementById("resultsContent");
+
+      const stored = localStorage.getItem("reviewInput");
+      if (!stored) {
+        alert("No input found. Please go back to the home page.");
+        window.location.href = "index.html";
+        return;
+      }
+
+      const { title, inclusion, exclusion } = JSON.parse(stored);
+
+      try {
+        const response = await fetch("http://127.0.0.1:8000/generate-review", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            title,
+            inclusion_criteria: inclusion.split(',').map(x => x.trim()),
+            exclusion_criteria: exclusion.split(',').map(x => x.trim())
+          })
+        });
+
+        if (!response.ok) {
+          throw new Error("Server error");
+        }
+
+        const data = await response.json();
+
+        // Process summary and references
+        const summaryText = document.getElementById("summaryText");
+        const rawSummary = data.review_summary || "No summary found.";
+        const [mainPart, referencesPart] = rawSummary.split("References:");
+
+        let summaryHTML = marked.parse(mainPart.trim());
+
+        if (referencesPart) {
+          const references = referencesPart
+            .split(/\[\d+\]/)
+            .filter(ref => ref.trim())
+            .map((ref, i) => `<li>[${i + 1}] ${ref.trim()}</li>`)
+            .join("");
+          summaryHTML += `<h3>References</h3><ol>${references}</ol>`;
+        }
+
+        summaryText.innerHTML = summaryHTML;
+
+        // Render papers
+        const papersList = document.getElementById("papersList");
+        papersList.innerHTML = "";
+
+        data.papers.forEach((paper, i) => {
+          const paperDiv = document.createElement("div");
+          paperDiv.className = "paper";
+          paperDiv.innerHTML = `
+            <h3>${i + 1}. ${paper.title}</h3>
+            <p>${paper.abstract}</p>
+            <p class="score">Relevance Score: ${paper.score}</p>
+            <a href="${paper.url}" target="_blank">View Paper</a>
+          `;
+          papersList.appendChild(paperDiv);
+        });
+
+        loading.style.display = "none";
+        content.style.display = "flex";
+      } catch (err) {
+        console.error("Error loading results:", err);
+        alert("Failed to load review. Check your server or console.");
+        loading.innerHTML = "⚠️ Failed to load results.";
+      }
+    });
+  </script>
+</body>
+</html>

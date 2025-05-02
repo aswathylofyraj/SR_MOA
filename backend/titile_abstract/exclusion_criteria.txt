@@ -1,0 +1,16 @@
+HPV corpus Exclusion Criteria:
+- Children (age < 13 years) only.
+- HPV-infected subjects only.
+- Immunocompromised populations only (e.g., HIV-infected).
+- Specific high-risk populations only (e.g., smokers, people who abuse alcohol).
+
+PAPD corpus Exclusion Criteria:
+- Patients with specific, non-targeted diseases or undergoing specific treatments only.
+- Other special populations (e.g., prison inmates, immigrants, ethnic minority populations only).
+- Language not English.
+- Conference proceedings.
+- No abstract.
+- Narrative review (except highly relevant reviews for primary references).
+- Small study (N < 25).
+- Clinical guideline.
+- Mixed pediatric/adult populations without segregated results.

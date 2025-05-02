@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Systematic Review AI Assistant</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(to bottom right, #0f172a, #1e293b);
+      color: #fff;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem;
+      text-align: center;
+    }
+
+    .title {
+      font-size: 2.5rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+      font-size: 1.2rem;
+      color: #cbd5e1;
+      margin-bottom: 2rem;
+    }
+
+    .assistant-img {
+      width: 80px;
+      margin-bottom: 1rem;
+    }
+
+    .form-box {
+      background: #f8fafc;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+      color: #0f172a;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-top: 1.2rem;
+      margin-bottom: 0.4rem;
+      text-align: left;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-family: 'Inter', sans-serif;
+    }
+
+    button {
+      margin-top: 1.8rem;
+      padding: 0.8rem 1.5rem;
+      font-size: 1rem;
+      font-weight: 600;
+      color: white;
+      background-color: #f59e0b;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      width: 100%;
+    }
+
+    button:hover {
+      background-color: #d97706;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="https://cdn-icons-png.flaticon.com/512/4712/4712027.png" alt="Assistant Icon" class="assistant-img" />
+    <h1 class="title">Systematic Review AI Assistant</h1>
+    <p class="subtitle">Empowering researchers with AI-driven literature reviews</p>
+
+    <div class="form-box">
+      <label for="title">Title:</label>
+      <input type="text" id="title" placeholder="Enter your research topic" required />
+
+      <label for="inclusion">Inclusion Criteria:</label>
+      <input type="text" id="inclusion" placeholder="e.g. AI, Healthcare, Diagnosis" required />
+
+      <label for="exclusion">Exclusion Criteria:</label>
+      <input type="text" id="exclusion" placeholder="e.g. Blockchain, Agriculture" />
+
+      <label for="year">Papers From (Minimum Year):</label>
+      <select id="year">
+        <option value="">-- Select Year --</option>
+      </select>
+
+      <button onclick="submitAndRedirect()">Generate Review</button>
+    </div>
+  </div>
+
+  <script>
+    // Populate year dropdown (2025 to 2000)
+    const yearDropdown = document.getElementById("year");
+    for (let y = 2025; y >= 2000; y--) {
+      let option = document.createElement("option");
+      option.value = y;
+      option.textContent = y;
+      yearDropdown.appendChild(option);
+    }
+
+    function submitAndRedirect() {
+      const title = document.getElementById("title").value.trim();
+      const inclusion = document.getElementById("inclusion").value.trim();
+      const exclusion = document.getElementById("exclusion").value.trim();
+      const year = document.getElementById("year").value;
+
+      if (!title || !inclusion) {
+        alert("Please fill out at least the title and inclusion criteria.");
+        return;
+      }
+
+      localStorage.setItem("reviewInput", JSON.stringify({
+        title,
+        inclusion,
+        exclusion,
+        year: year ? parseInt(year) : null
+      }));
+
+      window.location.href = "results.html";
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+User Input: The process begins with the user providing a title and inclusion/exclusion criteria.
+Search Agent: This agent searches for relevant papers from arXiv and Semantic Scholar using the provided title and criteria.
+Time Filter Agent: Filters the search results based on the user-defined publication year.
+Title Screening Agent: (To be developed) This agent screens the titles of the filtered papers for relevance.
+Abstract Screening Agent: Evaluates the papers based on their abstracts to determine suitability.
+Quality Agent: Assigns a relevance score to each paper based on the length of the abstract.
+Review Agent: Generates a comprehensive literature review based on the selected papers.
+Final Output: The process concludes with the delivery of a structured literature review to the user.

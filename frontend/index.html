@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Systematic Review AI Assistant</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+  <style>
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+
+    @keyframes blink {
+      50% { border-color: transparent }
+    }
+
+    .typewriter {
+      overflow: hidden;
+      white-space: nowrap;
+      border-right: 2px solid #fff;
+      animation: typing 4s steps(40, end), blink 0.8s step-end infinite;
+    }
+  </style>
+</head>
+
+<body class="bg-gray-900 text-white">
+
+  <!-- Hero Section -->
+  <header class="relative h-screen bg-cover bg-center" style="background: linear-gradient(to bottom right, #0f172a, #1e293b);">
+    
+    <!-- Dark overlay -->
+    <div class="absolute inset-0 bg-black bg-opacity-60 backdrop-blur-sm"></div>
+
+    <!-- Content -->
+    <div class="relative z-10 flex items-center justify-center h-full px-6">
+      <div class="text-center max-w-3xl mx-auto">
+        <h1 class="text-5xl md:text-7xl font-bold">Empowering Research with AI</h1>
+        <p class="mt-6 text-xl md:text-2xl typewriter">Streamline your systematic reviews effortlessly.</p>
+        <a href="home.html" class="mt-8 inline-block bg-yellow-400 hover:bg-yellow-300 text-gray-900 font-semibold py-3 px-8 rounded-xl shadow-xl transition duration-300">
+          Get Started
+        </a>
+      </div>
+    </div>
+  </header>
+
+</body>
+</html>
