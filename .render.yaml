@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 services:
   - type: web
     name: llm-litreview-backend
@@ -8,3 +9,15 @@ services:
     envVars:
       - key: PORT
         value: 10000
+=======
+services:
+  - type: web
+    name: llm-litreview-backend
+    env: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "uvicorn main:app --host 0.0.0.0 --port 10000"
+    workingDir: backend
+    envVars:
+      - key: PORT
+        value: 10000
+>>>>>>> 2f55b00 (Refactor agents to use .env for API keys)

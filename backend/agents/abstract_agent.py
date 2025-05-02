@@ -1,8 +1,13 @@
 import httpx
+import os
+from dotenv import load_dotenv
+
+# Load environment variables from .env file in the same directory
+load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), ".env"))
 
 class AbstractScreeningAgent:
     def __init__(self):
-        self.api_key = "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"  # 🔐 Direct API key
+        self.api_key = os.getenv("ABSTRACT_AGENT_API_KEY")
         self.api_url = "https://openrouter.ai/api/v1/chat/completions"
         self.model = "deepseek/deepseek-chat"
 

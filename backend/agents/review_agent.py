@@ -1,9 +1,13 @@
 import os
 import requests
+from dotenv import load_dotenv
+
+# Load environment variables from .env file in the same directory
+load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), ".env"))
 
 class ReviewAgent:
     def __init__(self):
-        self.api_key = "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"
+        self.api_key = os.getenv("REVIEW_AGENT_API_KEY")
         self.api_url = "https://openrouter.ai/api/v1/chat/completions"
         self.model = "mistralai/mistral-7b-instruct"
 
@@ -52,7 +56,8 @@ Your output must:
 - Identify common themes, innovations, global insights, and gaps in research
 - Synthesize the findings across all papers instead of listing them individually
 - Do not include in-text citation numbers or a references section
-- write summary with proper heading
+- Write summary with proper heading
+
 Here are the papers:
 
 {all_papers_text}
