@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: llm-litreview-backend
+    runtime: python
+    repo: https://github.com/aswathylofyraj/SR_MOA.git
+    branch: main
+    rootDir: LLM-LITREVIEW-AGENTS
+    buildCommand: ls -R && pip install -r requirements.txt && python -c "import torch; import transformers; print('Dependencies loaded successfully')"
+    startCommand: uvicorn backend.main:app --host 0.0.0.0 --port 10000
+    envVars:
+      - key: PORT
+        value: 10000
