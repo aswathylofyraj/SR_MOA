@@ -59,3 +59,30 @@ class TitleScreeningAgent:
             included_papers = [paper for i, paper in enumerate(papers) if "YES" in lines[i].upper()]
 
         return included_papers
+"""def test_title_screening_agent():
+    agent = TitleScreeningAgent()
+
+    # Example test input
+    papers = [
+        {
+            "title": "Artificial Intelligence in Breast Cancer Detection"
+        },
+        {
+            "title": "AI Applications in Smart Farming"
+        },
+        {
+            "title": "Deep Learning for Lung Cancer Screening"
+        }
+    ]
+
+    inclusion_criteria = ["AI in cancer detection", "medical screening"]
+    exclusion_criteria = ["agriculture", "non-medical"]
+
+    try:
+        included = agent.predict_inclusion(papers, inclusion_criteria, exclusion_criteria)
+        print("Included titles:")
+        for paper in included:
+            print(f"- {paper['title']}")
+    except Exception as e:
+        print(f"Error during title screening: {e}")
+test_title_screening_agent() """

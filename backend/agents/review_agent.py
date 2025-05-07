@@ -1,3 +1,4 @@
+import httpx
 import os
 import requests
 from dotenv import load_dotenv
@@ -21,7 +22,7 @@ class ReviewAgent:
             "messages": messages
         }
 
-        response = requests.post(self.api_url, headers=headers, json=payload)
+        response = httpx.post(self.api_url, headers=headers, json=payload, timeout=60.0)  # 60 seconds
         response.raise_for_status()
         return response.json()["choices"][0]["message"]["content"]
 
@@ -71,3 +72,30 @@ Now write the summary without in-text citations or references.
         ]
 
         return self.chat_completion(messages)
+
+"""def test_review_agent():
+    agent = ReviewAgent()
+
+    # Example test input: a couple of simplified papers
+    papers = [
+        {
+            "title": "Deep Learning in Breast Cancer Diagnosis",
+            "abstract": "This paper explores deep learning approaches for breast cancer detection using medical imaging datasets.",
+            "authors": [{"name": "Jane Doe"}, {"name": "John Smith"}],
+            "year": "2023"
+        },
+        {
+            "title": "AI-Based Lung Cancer Screening Techniques",
+            "abstract": "An overview of AI applications in the early detection of lung cancer, focusing on CT scan analysis and pattern recognition.",
+            "authors": [{"name": "Alice Brown"}],
+            "year": "2022"
+        }
+    ]
+
+    try:
+        summary = agent.generate_summary(papers)
+        print("Generated Summary:\n")
+        print(summary)
+    except Exception as e:
+        print(f"Error generating review summary: {e}")
+test_review_agent() """
