@@ -1,4 +1,4 @@
-# Systematic Review Screening with LLM Agents
+# Systematic Review Screening with Mixture of Agents
 
 This project automates systematic literature reviews using a pipeline of intelligent agents. It uses powerful LLM-based tools to search, screen, and review academic papers based on user-defined criteria.
 
