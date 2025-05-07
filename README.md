@@ -26,38 +26,65 @@ All of this is done through a seamless agent-based workflow, producing selected 
 
 ## ⚙️ Setup Instructions
 
+
+
 1. **Clone the repository**
+
    ```bash
-   git clone https://github.com/anoopkdcs/SystematicReviewScreening.git
+   git clone https://github.com/aswathylofyraj/SR_MOA.git
+   ```
 
-# 1. Clone the repo
-git clone https://github.com/anoopkdcs/SystematicReviewScreening.git
+2. **Go into the project folder**
 
-# 2. Go into the project folder
-cd SystematicReviewScreening/llm-litreview-agents
+   ```bash
+   cd SystematicReviewScreening/llm-litreview-agents
+   ```
 
-# 3. (Optional but good) Create and activate a virtual environment
-python3 -m venv venv
+3. **(Optional but recommended) Create a virtual environment**
 
-# 4. Activate the virtual environment
+   ```bash
+   python3 -m venv venv
+   ```
+
+4. **Activate the virtual environment**
+
+   * **If you're on Windows CMD:**
+
+     ```bash
+     venv\Scripts\activate
+     ```
+
+   * **If you're on Windows PowerShell:**
+
+     ```bash
+     .\venv\Scripts\Activate.ps1
+     ```
+
+   * **If you're on macOS/Linux:**
+
+     ```bash
+     source venv/bin/activate
+     ```
+
+5. **Install the dependencies**
+
+   ```bash
+   pip install --upgrade pip
+   pip install -r requirements.txt
+   ```
+
+6. **Run the app (assuming main file is `main.py`)**
+
+   ```bash
+   uvicorn main:app --reload
+   ```
 
 
-# If you're on Windows CMD:
-venv\Scripts\activate
 
-# If you're on Windows PowerShell:
-.\venv\Scripts\Activate.ps1
-
-# 5. Install dependencies
-pip install --upgrade pip
-pip install -r requirements.txt
-
-# 6. Run the app (assuming app file is app.py and using uvicorn)
-uvicorn main:app --reload
 
 📦 Output
 The system returns:
 
-Filtered and scored research papers
+1. Filtered and scored research papers
 
-AI-generated summary review
+2. AI-generated summary review
