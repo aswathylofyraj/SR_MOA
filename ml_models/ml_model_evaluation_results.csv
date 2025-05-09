@@ -1,0 +1,17 @@
+Model,Dataset,Feature Set,Validation Accuracy,Test Accuracy,Validation Precision,Test Precision,Validation Recall,Test Recall,Validation F1 Score,Test F1 Score
+XGBoost,HPV,Baseline,0.76,0.79,0.69,0.76,0.53,0.62,0.6,0.68
+XGBoost,HPV,All Features,0.79,0.81,0.77,0.78,0.57,0.64,0.65,0.7
+SVM,HPV,Baseline,0.81,0.81,0.8,0.8,0.57,0.64,0.67,0.71
+SVM,HPV,All Features,0.81,0.81,0.8,0.78,0.6,0.64,0.69,0.7
+Logistic Regression,HPV,Baseline,0.81,0.82,0.84,0.81,0.53,0.64,0.65,0.72
+Logistic Regression,HPV,All Features,0.8,0.81,0.79,0.78,0.57,0.64,0.66,0.7
+Random Forest,HPV,Baseline,0.72,0.72,0.87,0.88,0.22,0.25,0.36,0.38
+Random Forest,HPV,All Features,0.71,0.7,0.85,0.75,0.19,0.25,0.31,0.37
+XGBoost,PAPD,Baseline,0.86,0.85,0.76,0.79,0.64,0.64,0.7,0.71
+XGBoost,PAPD,All Features,0.87,0.85,0.77,0.81,0.67,0.63,0.72,0.71
+SVM,PAPD,Baseline,0.87,0.86,0.79,0.79,0.63,0.68,0.7,0.73
+SVM,PAPD,All Features,0.86,0.85,0.76,0.79,0.6,0.64,0.67,0.71
+Logistic Regression,PAPD,Baseline,0.87,0.85,0.79,0.79,0.63,0.62,0.7,0.69
+Logistic Regression,PAPD,All Features,0.87,0.85,0.8,0.81,0.64,0.63,0.71,0.71
+Random Forest,PAPD,Baseline,0.85,0.83,0.86,0.86,0.44,0.47,0.58,0.61
+Random Forest,PAPD,All Features,0.84,0.82,0.83,0.86,0.41,0.44,0.55,0.59
