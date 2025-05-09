@@ -38,6 +38,7 @@ abstract_agent = AbstractScreeningAgent()
 @app.post("/generate-review")
 def generate_review(request: ReviewRequest):
     # Step 1: Search
+    print("🚀 Launching Search Agent: Scanning the universe of knowledge for relevant papers...")
     papers = search_agent.search_papers(
         title=request.title,
         inclusion_criteria=request.inclusion_criteria,
@@ -46,12 +47,14 @@ def generate_review(request: ReviewRequest):
 
     # Step 2: Time Filter
     if request.min_year:
+        print(f"⏰ Activating Time Filter Agent: Filtering out research before {request.min_year}...")
         papers = time_filter_agent.filter_by_year(
             papers=papers,
             min_year=request.min_year
         )
 
     # Step 3: Title Screening
+    print("🔎 Title Screening Agent on duty: Examining paper titles for relevance...")
     title_screened_papers = title_agent.predict_inclusion(papers, request.inclusion_criteria, request.exclusion_criteria)
     if not title_screened_papers:
         return {
@@ -61,6 +64,7 @@ def generate_review(request: ReviewRequest):
         }
 
     # Step 4: Abstract Screening
+    print("📚 Abstract Screening Agent online: Diving deeper into the abstracts...")
     abstract_screened_papers = abstract_agent.predict_inclusion(title_screened_papers, request.inclusion_criteria, request.exclusion_criteria)
     if not abstract_screened_papers:
         return {
@@ -70,11 +74,14 @@ def generate_review(request: ReviewRequest):
         }
 
     # Step 5: Score
+    print("🏆 Quality Agent engaged: Evaluating and scoring the cream of the crop...")
     scored_papers = quality_agent.score_papers(abstract_screened_papers)
 
     # Step 6: Review Generation
+    print("🧠 Review Agent is synthesizing insights: Crafting a compelling summary from top-tier papers...")
     review_summary = review_agent.generate_summary(scored_papers)
 
+    print("🎉 Review generation complete! ")
     return {
         "message": f"Generated review from {len(scored_papers)} high-quality papers.",
         "papers": scored_papers,
